@@ -1,0 +1,10 @@
+.MMM-AlarmClock .logo {
+    margin-right: 5px;
+}
+
+.MMM-AlarmClock .button {
+    padding: 10px 40px;
+    border: 2px solid #FFFFFF;
+    border-radius: 10px;
+    text-align: center;
+}
