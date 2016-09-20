@@ -43,7 +43,7 @@ Module.register("MMM-AlarmClock", {
     },
 
     checkAlarm: function(){
-        if(this.next && moment().diff(this.next.moment) >= 0){
+        if(!this.alarmFired && this.next && moment().diff(this.next.moment) >= 0){
             var alert = {
                 imageFA: 'bell-o',
                 message: this.next.message
@@ -74,7 +74,6 @@ Module.register("MMM-AlarmClock", {
                 this.next.moment = temp;
             }
         }
-        this.updateDom(300);
     },
 
     resetAlarmClock: function(){
@@ -83,16 +82,19 @@ Module.register("MMM-AlarmClock", {
             this.sendNotification("HIDE_ALERT");
         }
         this.setNextAlarm();
+        this.updateDom(300);
     },
 
     getMoment: function(alarm){
         var now = moment();
         var difference = Math.min();
+        var hour = parseInt(alarm.time.split(":")[0]);
+        var minute = parseInt(alarm.time.split(":")[1]);
 
         for(var i = 0; i < alarm.days.length; i++){
             if(now.day() < alarm.days[i]){
                 difference = Math.min(alarm.days[i] - now.day(), difference);
-            } else if(now.day() === alarm.days[i] && (parseInt(now.hour()) < alarm.hour || parseInt(now.hour()) === alarm.hour && parseInt(now.minute()) <= alarm.minute)){
+            } else if(now.day() === alarm.days[i] && (parseInt(now.hour()) < hour || parseInt(now.hour()) === hour && parseInt(now.minute()) <= minute)){
                 difference = Math.min(0, difference);
             } else if(now.day() === alarm.days[i]){
                 difference = Math.min(7, difference);
@@ -102,8 +104,8 @@ Module.register("MMM-AlarmClock", {
         }
 
         return moment().add(difference, 'days').set({
-            hour: parseInt(alarm.time.split(":")[0]),
-            minute: parseInt(alarm.time.split(":")[1]),
+            hour: hour,
+            minute: minute,
             second: 0,
             millisecond: 0
         });
