@@ -13,7 +13,6 @@ Module.register("MMM-AlarmClock", {
     defaults: {
         sound: 'alarm.mp3',
         touch: false,
-        display: true,
         format: "ddd, h:mmA",
         timer: 60 * 1000 // one minute
     },
