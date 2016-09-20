@@ -26,6 +26,13 @@ Module.register("MMM-AlarmClock", {
         return ["moment.js"];
     },
 
+    getTranslations: function () {
+        return {
+            en: "translations/en.json",
+            de: "translations/de.json"
+        };
+    },
+
     start: function () {
         Log.info("Starting module: " + this.name);
         this.setNextAlarm();
@@ -39,8 +46,7 @@ Module.register("MMM-AlarmClock", {
         if(this.next && moment().diff(this.next.moment) >= 0){
             var alert = {
                 imageFA: 'bell-o',
-                message: this.next.message,
-                timer: this.config.timer
+                message: this.next.message
             };
             if(!this.config.touch){
                 alert.timer = this.config.timer;
@@ -116,7 +122,7 @@ Module.register("MMM-AlarmClock", {
         header.appendChild(logo);
 
         var name = document.createElement("span");
-        name.innerHTML = this.translate("ALARM_CLOCK") + this.next ? " " + this.next.moment.format(this.config.format) : "";
+        name.innerHTML = this.translate("ALARM_CLOCK") + (this.next ? " " + this.next.moment.format(this.config.format) : "");
         header.appendChild(name);
         wrapper.appendChild(header);
 
