@@ -60,6 +60,14 @@ Module.register("MMM-AlarmClock", {
                 setTimeout(() => {
                     this.resetAlarmClock();
                 }, this.config.timer);
+            } else {
+                MM.getModules().enumerate((module) => {
+                    if(module.name === "alert"){
+                        module.alerts["MMM-AlarmClock"].ntf.addEventListener("click", () => {
+                            this.resetAlarmClock();
+                        });
+                    }
+                });
             }
         }
     },
@@ -93,7 +101,7 @@ Module.register("MMM-AlarmClock", {
         for(var i = 0; i < alarm.days.length; i++){
             if(now.day() < alarm.days[i]){
                 difference = Math.min(alarm.days[i] - now.day(), difference);
-            } else if(now.day() === alarm.days[i] && (parseInt(now.hour()) < hour || parseInt(now.hour()) === hour && parseInt(now.minute()) <= minute)){
+            } else if(now.day() === alarm.days[i] && (parseInt(now.hour()) < hour || parseInt(now.hour()) === hour && parseInt(now.minute()) < minute)){
                 difference = Math.min(0, difference);
             } else if(now.day() === alarm.days[i]){
                 difference = Math.min(7, difference);
@@ -123,7 +131,7 @@ Module.register("MMM-AlarmClock", {
         header.appendChild(logo);
 
         var name = document.createElement("span");
-        name.innerHTML = this.translate("ALARM_CLOCK") + (this.next ? " " + this.next.moment.format(this.config.format) : "");
+        name.innerHTML = this.translate("ALARM_CLOCK") + (this.next ? "&nbsp;&nbsp;&nbsp;" + this.next.moment.format(this.config.format) : "");
         header.appendChild(name);
         wrapper.appendChild(header);
 
@@ -138,14 +146,6 @@ Module.register("MMM-AlarmClock", {
             sound.setAttribute("autoplay", true);
             sound.setAttribute("loop", true);
             wrapper.appendChild(sound);
-
-            if(this.config.touch){
-                var button = document.createElement("div");
-                button.classList.add("button", "medium");
-                button.addEventListener("click", this.resetAlarmClock);
-                button.innerHTML = this.translate("TURN_OFF");
-                wrapper.appendChild(button);
-            }
         } else {
             var alarm = document.createElement("div");
             alarm.innerHTML = this.next.message;
