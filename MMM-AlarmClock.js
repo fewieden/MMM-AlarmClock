@@ -13,6 +13,7 @@ Module.register("MMM-AlarmClock", {
     defaults: {
         sound: 'alarm.mp3',
         touch: false,
+        volume: 1.0,
         format: "ddd, h:mmA",
         timer: 60 * 1000 // one minute
     },
@@ -45,13 +46,11 @@ Module.register("MMM-AlarmClock", {
         if(!this.alarmFired && this.next && moment().diff(this.next.moment) >= 0){
             var alert = {
                 imageFA: 'bell-o',
+                title: this.next.sender || this.next.title,
                 message: this.next.message
             };
             if(!this.config.touch){
                 alert.timer = this.config.timer;
-            }
-            if(this.next.hasOwnProperty("sender")){
-                alert.title = this.next.sender;
             }
             this.sendNotification("SHOW_ALERT", alert);
             this.alarmFired = true;
@@ -131,7 +130,7 @@ Module.register("MMM-AlarmClock", {
         header.appendChild(logo);
 
         var name = document.createElement("span");
-        name.innerHTML = this.translate("ALARM_CLOCK") + (this.next ? "&nbsp;&nbsp;&nbsp;" + this.next.moment.format(this.config.format) : "");
+        name.innerHTML = this.translate("ALARM_CLOCK");
         header.appendChild(name);
         wrapper.appendChild(header);
 
@@ -143,12 +142,14 @@ Module.register("MMM-AlarmClock", {
         } else if(this.alarmFired) {
             var sound = document.createElement("audio");
             sound.src = this.file("sounds/" + this.config.sound);
+            sound.volume = this.config.volume;
             sound.setAttribute("autoplay", true);
             sound.setAttribute("loop", true);
             wrapper.appendChild(sound);
         } else {
             var alarm = document.createElement("div");
-            alarm.innerHTML = this.next.message;
+            alarm.classList.add("small");
+            alarm.innerHTML = this.next.title  + ": " + this.next.moment.format(this.config.format);
             wrapper.appendChild(alarm);
         }
 
