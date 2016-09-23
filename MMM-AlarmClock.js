@@ -105,7 +105,7 @@ Module.register("MMM-AlarmClock", {
             } else if(now.day() === alarm.days[i]){
                 difference = Math.min(7, difference);
             } else {
-                difference = Math.min(6 - now.day() + alarm.days[i], difference);
+                difference = Math.min(7 - now.day() + alarm.days[i], difference);
             }
         }
 
