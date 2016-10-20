@@ -55,14 +55,14 @@ Module.register("MMM-AlarmClock", {
             this.sendNotification("SHOW_ALERT", alert);
             this.alarmFired = true;
             this.updateDom(300);
-            if(!this.config.touch){
-                setTimeout(() => {
-                    this.resetAlarmClock();
-                }, this.config.timer);
-            } else {
+            this.timer = setTimeout(() => {
+                this.resetAlarmClock();
+            }, this.config.timer);
+            if(this.config.touch){
                 MM.getModules().enumerate((module) => {
                     if(module.name === "alert"){
                         module.alerts["MMM-AlarmClock"].ntf.addEventListener("click", () => {
+                            clearTimeout(this.timer);
                             this.resetAlarmClock();
                         });
                     }

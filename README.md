@@ -34,7 +34,7 @@ Alarm Clock Module for MagicMirror<sup>2</sup>
 | `volume` | `1.0` | The volume of the alarm sound in a range from `0.0` to `1.0` |
 | `touch` | `false` | If you are using a touch screen device you need to press a button to disable an alarm.. |
 | `format` | `'ddd, h:mmA'` | In which format the alarm in the header should be displayed. [All Options](http://momentjs.com/docs/#/displaying/format/) |
-| `timer` | `60000` (1 min) | How long the alarm should ring for non touch screen devices. |
+| `timer` | `60000` (1 min) | How long the alarm should ring for non touch screen or without interaction on touch screen devices. |
 
 ## Alarm Sounds
 There are already two alarm sounds:
