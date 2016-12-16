@@ -141,7 +141,11 @@ Module.register("MMM-AlarmClock", {
             wrapper.appendChild(text);
         } else if(this.alarmFired) {
             var sound = document.createElement("audio");
-            sound.src = this.file("sounds/" + this.config.sound);
+            if (this.config.sound.match(/^http/)) {
+                sound.src = this.config.sound;
+            }else{
+                sound.src = this.file("sounds/" + this.config.sound);
+            }
             sound.volume = this.config.volume;
             sound.setAttribute("autoplay", true);
             sound.setAttribute("loop", true);
