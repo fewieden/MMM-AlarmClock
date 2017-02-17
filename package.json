@@ -1,0 +1,29 @@
+{
+  "name": "mmm-alarmclock",
+  "version": "1.0.0",
+  "description": "Alarm Clock Module for MagicMirror2",
+  "scripts": {
+    "lint": "./node_modules/.bin/eslint . && ./node_modules/.bin/stylelint ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fewieden/MMM-AlarmClock.git"
+  },
+  "keywords": [
+    "MagicMirror",
+    "alarm clock"
+  ],
+  "author": "fewieden",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/fewieden/MMM-AlarmClock/issues"
+  },
+  "homepage": "https://github.com/fewieden/MMM-AlarmClock#readme",
+  "devDependencies": {
+    "eslint": "^3.14.1",
+    "eslint-config-airbnb-base": "^11.0.1",
+    "eslint-plugin-import": "^2.2.0",
+    "stylelint": "^7.8.0",
+    "stylelint-config-standard": "^16.0.0"
+  }
+}
