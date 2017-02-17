@@ -1,4 +1,5 @@
-# MMM-AlarmClock
+# MMM-AlarmClock [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/fewieden/MMM-AlarmClock/master/LICENSE) [![Build Status](https://travis-ci.org/fewieden/MMM-AlarmClock.svg?branch=master)](https://travis-ci.org/fewieden/MMM-AlarmClock) [![Code Climate](https://codeclimate.com/github/fewieden/MMM-AlarmClock/badges/gpa.svg?style=flat)](https://codeclimate.com/github/fewieden/MMM-AlarmClock) [![Known Vulnerabilities](https://snyk.io/test/github/fewieden/mmm-alarmclock/badge.svg)](https://snyk.io/test/github/fewieden/mmm-alarmclock)
+
 Alarm Clock Module for MagicMirror<sup>2</sup>
 
 ## Example
@@ -6,11 +7,13 @@ Alarm Clock Module for MagicMirror<sup>2</sup>
 ![](.github/example.jpg)   ![](.github/example2.jpg)
 
 ## Dependencies
-  * An installation of [MagicMirror<sup>2</sup>](https://github.com/MichMich/MagicMirror)
+
+* An installation of [MagicMirror<sup>2</sup>](https://github.com/MichMich/MagicMirror)
 
 ## Installation
- 1. Clone this repo into `~/MagicMirror/modules` directory.
- 2. Configure your `~/MagicMirror/config/config.js`:
+
+1. Clone this repo into `~/MagicMirror/modules` directory.
+1. Configure your `~/MagicMirror/config/config.js`:
 
     ```
     {
@@ -27,6 +30,7 @@ Alarm Clock Module for MagicMirror<sup>2</sup>
     ```
 
 ## Config Options
+
 | **Option** | **Default** | **Description** |
 | --- | --- | --- |
 | `alarm` | `REQUIRED` | An Array with all your alarms as objects. Those objects need to have the properties -> time: 24h format, days: Array of all days the alarm should be fired (0 = Sunday, 6 = Saturday), title and message. |
@@ -37,6 +41,8 @@ Alarm Clock Module for MagicMirror<sup>2</sup>
 | `timer` | `60000` (1 min) | How long the alarm should ring for non touch screen or without interaction on touch screen devices. |
 
 ## Alarm Sounds
+
 There are already two alarm sounds:
-  * [alarm.mp3](http://www.orangefreesounds.com/mp3-alarm-clock/) | From Alexander licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
-  * [blackforest.mp3](http://www.orangefreesounds.com/coo-coo-clock-sound/) | From Alexander licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+
+* [alarm.mp3](http://www.orangefreesounds.com/mp3-alarm-clock/) | From Alexander licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+* [blackforest.mp3](http://www.orangefreesounds.com/coo-coo-clock-sound/) | From Alexander licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
