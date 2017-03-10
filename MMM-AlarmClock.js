@@ -17,7 +17,10 @@ Module.register('MMM-AlarmClock', {
         touch: false,
         volume: 1.0,
         format: 'ddd, h:mmA',
-        timer: 60 * 1000 // one minute
+        timer: 60 * 1000, // one minute
+        fade: false,
+        fade_timer: 60 * 1000, // 60 seconds
+        fade_step: .005, // .5%
     },
 
     getStyles() {
@@ -71,6 +74,28 @@ Module.register('MMM-AlarmClock', {
                 });
             }
         }
+    },
+
+    fadeAlarm() {
+        var max_volume = this.config.volume;
+        var volume = 0;
+        var that = this;
+        var volume_step = this.config.fade_step;
+        var counter = 0;
+        var myTimer = setInterval(() => {
+            document.getElementById('alarm_player').volume = volume;
+            volume = volume + volume_step;
+            console.log(volume);
+            counter = counter + 1000;
+            if (volume >= max_volume) {
+                document.getElementById(that.identifier).volume = max_volume;
+                clearInterval(myTimer);
+            }
+            if (counter >= that.config.fade_timer) {
+                document.getElementById('alarm_player').volume = max_volume;
+                clearInterval(myTimer);
+            }
+        }, 1000);
     },
 
     setNextAlarm() {
@@ -141,6 +166,7 @@ Module.register('MMM-AlarmClock', {
             wrapper.appendChild(text);
         } else if (this.alarmFired) {
             const sound = document.createElement('audio');
+            sound.setAttribute('id', 'alarm_player');
             if (this.config.sound.match(/^https?:\/\//)) {
                 sound.src = this.config.sound;
             } else {
@@ -149,6 +175,9 @@ Module.register('MMM-AlarmClock', {
             sound.volume = this.config.volume;
             sound.setAttribute('autoplay', true);
             sound.setAttribute('loop', true);
+            if (this.config.fade == true) {
+                this.fadeAlarm(sound);
+            }
             wrapper.appendChild(sound);
         } else {
             const alarm = document.createElement('div');

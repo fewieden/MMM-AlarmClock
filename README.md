@@ -39,6 +39,9 @@ Alarm Clock Module for MagicMirror<sup>2</sup>
 | `touch` | `false` | If you are using a touch screen device you need to press a button to disable an alarm.. |
 | `format` | `'ddd, h:mmA'` | In which format the alarm in the header should be displayed. [All Options](http://momentjs.com/docs/#/displaying/format/) |
 | `timer` | `60000` (1 min) | How long the alarm should ring for non touch screen or without interaction on touch screen devices. |
+| `fade` | `false` | Set to enable a gradual fade-in of the alarm sound.
+| `fade_timer` | `60 * 1000` (1 min) | How long to fade into the alarm before `volume` is set.
+| `fade_step` | `.005` (.5%) | Increase the volume this percent amount each second until `fade_timer` is reached.
 
 ## Alarm Sounds
 
