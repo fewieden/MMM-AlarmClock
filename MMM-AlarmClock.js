@@ -124,7 +124,7 @@ Module.register('MMM-AlarmClock', {
     getDom() {
         const wrapper = document.createElement('div');
         const header = document.createElement('header');
-        header.classList.add('align-left');
+        //header.classList.add('align-left');
 
         const logo = document.createElement('i');
         logo.classList.add('fa', 'fa-bell-o', 'logo');
