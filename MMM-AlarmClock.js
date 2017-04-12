@@ -79,20 +79,18 @@ Module.register('MMM-AlarmClock', {
     fadeAlarm() {
         var max_volume = this.config.volume;
         var volume = 0;
-        var that = this;
         var volume_step = this.config.fade_step;
         var counter = 0;
         var myTimer = setInterval(() => {
-            document.getElementById('alarm_player').volume = volume;
+            document.getElementById('MMM-AlarmClock-Player').volume = volume;
             volume = volume + volume_step;
-            console.log(volume);
             counter = counter + 1000;
             if (volume >= max_volume) {
-                document.getElementById(that.identifier).volume = max_volume;
+                document.getElementById('MMM-AlarmClock-Player').volume = max_volume;
                 clearInterval(myTimer);
             }
-            if (counter >= that.config.fade_timer) {
-                document.getElementById('alarm_player').volume = max_volume;
+            if (counter >= this.config.fade_timer) {
+                document.getElementById('MMM-AlarmClock-Player').volume = max_volume;
                 clearInterval(myTimer);
             }
         }, 1000);
@@ -166,7 +164,7 @@ Module.register('MMM-AlarmClock', {
             wrapper.appendChild(text);
         } else if (this.alarmFired) {
             const sound = document.createElement('audio');
-            sound.setAttribute('id', 'alarm_player');
+            sound.setAttribute('id', 'MMM-AlarmClock-Player');
             if (this.config.sound.match(/^https?:\/\//)) {
                 sound.src = this.config.sound;
             } else {
@@ -176,7 +174,7 @@ Module.register('MMM-AlarmClock', {
             sound.setAttribute('autoplay', true);
             sound.setAttribute('loop', true);
             if (this.config.fade == true) {
-                this.fadeAlarm(sound);
+                this.fadeAlarm();
             }
             wrapper.appendChild(sound);
         } else {
