@@ -32,6 +32,7 @@ Module.register('MMM-AlarmClock', {
         return {
             en: 'translations/en.json',
             de: 'translations/de.json',
+            fr: 'translations/fr.json',
             id: 'translations/id.json'
         };
     },
