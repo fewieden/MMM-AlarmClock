@@ -1,4 +1,4 @@
-# MMM-AlarmClock [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/fewieden/MMM-AlarmClock/master/LICENSE) [![Build Status](https://travis-ci.org/fewieden/MMM-AlarmClock.svg?branch=master)](https://travis-ci.org/fewieden/MMM-AlarmClock) [![Code Climate](https://codeclimate.com/github/fewieden/MMM-AlarmClock/badges/gpa.svg?style=flat)](https://codeclimate.com/github/fewieden/MMM-AlarmClock) [![Known Vulnerabilities](https://snyk.io/test/github/fewieden/mmm-alarmclock/badge.svg)](https://snyk.io/test/github/fewieden/mmm-alarmclock)
+# MMM-AlarmClock [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/fewieden/MMM-AlarmClock/master/LICENSE) [![Build Status](https://travis-ci.org/fewieden/MMM-AlarmClock.svg?branch=master)](https://travis-ci.org/fewieden/MMM-AlarmClock) [![Code Climate](https://codeclimate.com/github/fewieden/MMM-AlarmClock/badges/gpa.svg?style=flat)](https://codeclimate.com/github/fewieden/MMM-AlarmClock) [![Known Vulnerabilities](https://snyk.io/test/github/fewieden/mmm-alarmclock/badge.svg)](https://snyk.io/test/github/fewieden/mmm-alarmclock) [![API Doc](https://doclets.io/fewieden/MMM-AlarmClock/master.svg)](https://doclets.io/fewieden/MMM-AlarmClock/master)
 
 Alarm Clock Module for MagicMirror<sup>2</sup>
 
@@ -49,3 +49,12 @@ There are already two alarm sounds:
 
 * [alarm.mp3](http://www.orangefreesounds.com/mp3-alarm-clock/) | From Alexander licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
 * [blackforest.mp3](http://www.orangefreesounds.com/coo-coo-clock-sound/) | From Alexander licensed under [CC BY-NC 4.0](https://creativecommons.org/licenses/by-nc/4.0/)
+
+## Developer
+
+* `npm run lint` - Lints JS and CSS files.
+* `npm run docs` - Generates documentation.
+
+### Documentation
+
+The documentation can be found [here](https://doclets.io/fewieden/MMM-AlarmClock/master)
