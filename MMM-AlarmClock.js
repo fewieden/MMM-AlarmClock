@@ -19,8 +19,8 @@ Module.register('MMM-AlarmClock', {
         format: 'ddd, h:mmA',
         timer: 60 * 1000, // one minute
         fade: false,
-        fade_timer: 60 * 1000, // 60 seconds
-        fade_step: .005, // .5%
+        fadeTimer: 60 * 1000, // 60 seconds
+        fadeStep: 0.005 // 0.5%
     },
 
     getStyles() {
@@ -77,20 +77,16 @@ Module.register('MMM-AlarmClock', {
     },
 
     fadeAlarm() {
-        var max_volume = this.config.volume;
-        var volume = 0;
-        var volume_step = this.config.fade_step;
-        var counter = 0;
-        var myTimer = setInterval(() => {
+        const maxVolume = this.config.volume;
+        const volumeStep = this.config.fadeStep;
+        let volume = 0;
+        let counter = 0;
+        let myTimer = setInterval(() => {
             document.getElementById('MMM-AlarmClock-Player').volume = volume;
-            volume = volume + volume_step;
-            counter = counter + 1000;
-            if (volume >= max_volume) {
-                document.getElementById('MMM-AlarmClock-Player').volume = max_volume;
-                clearInterval(myTimer);
-            }
-            if (counter >= this.config.fade_timer) {
-                document.getElementById('MMM-AlarmClock-Player').volume = max_volume;
+            volume += volumeStep;
+            counter += 1000;
+            if (volume >= maxVolume || counter >= this.config.fadeTimer) {
+                document.getElementById('MMM-AlarmClock-Player').volume = maxVolume;
                 clearInterval(myTimer);
             }
         }, 1000);
@@ -173,7 +169,7 @@ Module.register('MMM-AlarmClock', {
             sound.volume = this.config.volume;
             sound.setAttribute('autoplay', true);
             sound.setAttribute('loop', true);
-            if (this.config.fade == true) {
+            if (this.config.fade === true) {
                 this.fadeAlarm();
             }
             wrapper.appendChild(sound);
