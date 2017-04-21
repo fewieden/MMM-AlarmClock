@@ -17,7 +17,10 @@ Module.register('MMM-AlarmClock', {
         touch: false,
         volume: 1.0,
         format: 'ddd, h:mmA',
-        timer: 60 * 1000 // one minute
+        timer: 60 * 1000, // one minute
+        fade: false,
+        fadeTimer: 60 * 1000, // 60 seconds
+        fadeStep: 0.005 // 0.5%
     },
 
     getStyles() {
@@ -73,6 +76,22 @@ Module.register('MMM-AlarmClock', {
                 });
             }
         }
+    },
+
+    fadeAlarm() {
+        const maxVolume = this.config.volume;
+        const volumeStep = this.config.fadeStep;
+        let volume = 0;
+        let counter = 0;
+        let myTimer = setInterval(() => {
+            document.getElementById('MMM-AlarmClock-Player').volume = volume;
+            volume += volumeStep;
+            counter += 1000;
+            if (volume >= maxVolume || counter >= this.config.fadeTimer) {
+                document.getElementById('MMM-AlarmClock-Player').volume = maxVolume;
+                clearInterval(myTimer);
+            }
+        }, 1000);
     },
 
     setNextAlarm() {
@@ -143,6 +162,7 @@ Module.register('MMM-AlarmClock', {
             wrapper.appendChild(text);
         } else if (this.alarmFired) {
             const sound = document.createElement('audio');
+            sound.setAttribute('id', 'MMM-AlarmClock-Player');
             if (this.config.sound.match(/^https?:\/\//)) {
                 sound.src = this.config.sound;
             } else {
@@ -151,6 +171,9 @@ Module.register('MMM-AlarmClock', {
             sound.volume = this.config.volume;
             sound.setAttribute('autoplay', true);
             sound.setAttribute('loop', true);
+            if (this.config.fade === true) {
+                this.fadeAlarm();
+            }
             wrapper.appendChild(sound);
         } else {
             const alarm = document.createElement('div');
