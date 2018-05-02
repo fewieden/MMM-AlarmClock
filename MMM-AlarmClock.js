@@ -31,8 +31,7 @@ Module.register('MMM-AlarmClock', {
     getTranslations() {
         return {
             en: 'translations/en.json',
-            de: 'translations/de.json',
-            id: 'translations/id.json'
+            de: 'translations/de.json'
         };
     },
 
@@ -55,6 +54,7 @@ Module.register('MMM-AlarmClock', {
             if (!this.config.touch) {
                 alert.timer = this.config.timer;
             }
+            this.sendNotification('MMM-TTS', 'This is an AlarmClock event. Please stay tuned!'); // MMM-TTS integration
             this.sendNotification('SHOW_ALERT', alert);
             this.alarmFired = true;
             this.updateDom(300);
@@ -124,6 +124,7 @@ Module.register('MMM-AlarmClock', {
     getDom() {
         const wrapper = document.createElement('div');
         const header = document.createElement('header');
+        //header.classList.add('align-right');
 
         const logo = document.createElement('i');
         logo.classList.add('fa', 'fa-bell-o', 'logo');
@@ -141,11 +142,22 @@ Module.register('MMM-AlarmClock', {
             wrapper.appendChild(text);
         } else if (this.alarmFired) {
             const sound = document.createElement('audio');
-            if (this.config.sound.match(/^https?:\/\//)) {
-                sound.src = this.config.sound;
-            } else {
-                sound.src = this.file(`sounds/${this.config.sound}`);
+            srcSound = null;
+            if (this.next.sound) {
+              if (this.next.sound.match(/^https?:\/\//)) {
+                  srcSound = this.next.sound;
+              } else {
+                  srcSound = this.file(`sounds/${this.next.sound}`);
+              }
             }
+            else {
+              if (this.config.sound.match(/^https?:\/\//)) {
+                  srcSound = this.config.sound;
+              } else {
+                  srcSound = this.file(`sounds/${this.config.sound}`);
+              }
+            }
+            sound.src = srcSound;
             sound.volume = this.config.volume;
             sound.setAttribute('autoplay', true);
             sound.setAttribute('loop', true);
