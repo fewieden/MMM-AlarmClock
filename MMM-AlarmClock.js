@@ -267,11 +267,7 @@ Module.register('MMM-AlarmClock', {
     getDom() {
         const wrapper = document.createElement('div');
         const header = document.createElement('header');
-<<<<<<< HEAD
-        //header.classList.add('align-right');
-=======
         header.classList.add('align-left');
->>>>>>> origin/master
 
         const logo = document.createElement('i');
         logo.classList.add('fa', 'fa-bell-o', 'logo');
@@ -289,7 +285,6 @@ Module.register('MMM-AlarmClock', {
             wrapper.appendChild(text);
         } else if (this.alarmFired) {
             const sound = document.createElement('audio');
-<<<<<<< HEAD
             srcSound = null;
             if (this.next.sound) {
               if (this.next.sound.match(/^https?:\/\//)) {
