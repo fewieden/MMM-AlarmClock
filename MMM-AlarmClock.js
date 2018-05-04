@@ -302,7 +302,6 @@ Module.register('MMM-AlarmClock', {
             }
             sound.src = srcSound;
             sound.volume = this.config.volume;
-=======
             sound.setAttribute('id', 'MMM-AlarmClock-Player');
             if (this.config.sound.match(/^https?:\/\//)) {
                 sound.src = this.config.sound;
@@ -310,7 +309,6 @@ Module.register('MMM-AlarmClock', {
                 sound.src = this.file(`sounds/${this.config.sound}`);
             }
             sound.volume = this.config.fade ? 0 : this.config.volume;
->>>>>>> b5158cbf6071ab77c8f5f15e359c0046ea1fc4ff
             sound.setAttribute('autoplay', true);
             sound.setAttribute('loop', true);
             if (this.config.fade === true) {
