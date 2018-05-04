@@ -144,6 +144,7 @@ Module.register('MMM-AlarmClock', {
             if (!this.config.touch) {
                 alert.timer = this.config.timer;
             }
+            this.sendNotification('MMM-TTS', 'This is an AlarmClock event. Please stay tuned!'); // MMM-TTS integration
             this.sendNotification('SHOW_ALERT', alert);
             this.alarmFired = true;
             this.updateDom(300);
@@ -284,6 +285,23 @@ Module.register('MMM-AlarmClock', {
             wrapper.appendChild(text);
         } else if (this.alarmFired) {
             const sound = document.createElement('audio');
+            srcSound = null;
+            if (this.next.sound) {
+              if (this.next.sound.match(/^https?:\/\//)) {
+                  srcSound = this.next.sound;
+              } else {
+                  srcSound = this.file(`sounds/${this.next.sound}`);
+              }
+            }
+            else {
+              if (this.config.sound.match(/^https?:\/\//)) {
+                  srcSound = this.config.sound;
+              } else {
+                  srcSound = this.file(`sounds/${this.config.sound}`);
+              }
+            }
+            sound.src = srcSound;
+            sound.volume = this.config.volume;
             sound.setAttribute('id', 'MMM-AlarmClock-Player');
             if (this.config.sound.match(/^https?:\/\//)) {
                 sound.src = this.config.sound;
