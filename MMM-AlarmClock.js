@@ -284,12 +284,16 @@ Module.register('MMM-AlarmClock', {
             wrapper.appendChild(text);
         } else if (this.alarmFired) {
             const sound = document.createElement('audio');
-            sound.setAttribute('id', 'MMM-AlarmClock-Player');
-            if (this.config.sound.match(/^https?:\/\//)) {
-                sound.src = this.config.sound;
-            } else {
-                sound.src = this.file(`sounds/${this.config.sound}`);
+            let srcSound = this.config.sound;
+            if (this.next.sound) {
+                srcSound = this.next.sound;
             }
+            if (!srcSound.match(/^https?:\/\//)) {
+                srcSound = this.file(`sounds/${srcSound}`);
+            }
+            sound.src = srcSound;
+            sound.volume = this.config.volume;
+            sound.setAttribute('id', 'MMM-AlarmClock-Player');
             sound.volume = this.config.fade ? 0 : this.config.volume;
             sound.setAttribute('autoplay', true);
             sound.setAttribute('loop', true);
