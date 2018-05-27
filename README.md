@@ -21,7 +21,7 @@ Alarm Clock Module for MagicMirror<sup>2</sup>
         position: 'top_right',
         config: {
             alarms: [
-                {time: "18:30", days: [2,4], title: "Soccer", message: "Get ready for soccer training!"},
+                {time: "18:30", days: [2,4], title: "Soccer", message: "Get ready for soccer training!", sound: "alarm.mp3"},
                 ...
             ],
             ...
@@ -33,7 +33,7 @@ Alarm Clock Module for MagicMirror<sup>2</sup>
 
 | **Option** | **Default** | **Description** |
 | --- | --- | --- |
-| `alarm` | `REQUIRED` | An Array with all your alarms as objects. Those objects need to have the properties -> time: 24h format, days: Array of all days the alarm should be fired (0 = Sunday, 6 = Saturday), title and message. |
+| `alarms` | `REQUIRED` | An Array with all your alarms as objects. Those objects need to have the properties -> time: 24h format, days: Array of all days the alarm should be fired (0 = Sunday, 6 = Saturday), title, message, and sound. If sound is not defined, alarm will be fired with module defined/default alarm sound. |
 | `sound` | `'alarm.mp3'` | Name and extension of your alarm sound. File needs to be placed in `~/MagicMirror/modules/MMM-AlarmClock/sounds`. Standard files are `alarm.mp3` and `blackforest.mp3`.  Alternatively specify a web stream `http` or `https`. |
 | `volume` | `1.0` | The volume of the alarm sound in a range from `0.0` to `1.0` |
 | `touch` | `false` | If you are using a touch screen device you need to press a button to disable an alarm.. |
