@@ -141,15 +141,20 @@ Module.register('MMM-AlarmClock', {
                 title: this.next.sender || this.next.title,
                 message: this.next.message
             };
+            let timer = this.config.timer;
             if (!this.config.touch) {
-                alert.timer = this.config.timer;
+                alert.timer = timer;
+            }
+            // If the alarm has specific timer and if MM is not touch, we use the alarm timer.
+            if (typeof this.next.timer !== "undefined" && !this.config.touch) {
+                alert.timer = timer = this.next.timer;
             }
             this.sendNotification('SHOW_ALERT', alert);
             this.alarmFired = true;
             this.updateDom(300);
             this.timer = setTimeout(() => {
                 this.resetAlarmClock();
-            }, this.config.timer);
+            }, timer);
             if (this.config.touch) {
                 MM.getModules().enumerate((module) => {
                     if (module.name === 'alert') {

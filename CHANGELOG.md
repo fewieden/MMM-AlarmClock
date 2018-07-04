@@ -1,5 +1,11 @@
 # MMM-AlarmClock Changelog
 
+## [1.1.1]
+
+### Added
+
+* Add a new alarm option : timer
+
 ## [1.1.0]
 
 ### Added
