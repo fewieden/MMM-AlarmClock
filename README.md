@@ -43,6 +43,17 @@ Alarm Clock Module for MagicMirror<sup>2</sup>
 | `fadeTimer` | `60 * 1000` (1 min) | How long to fade into the alarm before `volume` is set.
 | `fadeStep` | `.005` (.5%) | Increase the volume this percent amount each second until `fadeTimer` is reached.
 
+## Alarm Options
+
+| **Option**| **Description** |
+| --- | --- |
+| `time` | Time at which the alarm should sound. |
+| `days` | Days of the week. <br/>``0 => Sunday, 1 => Monday, 2 => Tuesday, 3 => Wednesday, 4 => Thursday, 5 => Friday, 6 => Saturday``<br/><br/>**Example :** ``[1, 2, 3, 4, 5], // From Monday to Friday.`` |
+| `title` |  Title that will be displayed in the alert. | 
+| `message` | Message of the alarm |
+| `sound` | Name or the url of the mp3 file. By default, the sound of the config will be use if this option is empty. |
+| `timer` | Timer when the alarm will end. By default, the timer of the configuration will be used. |
+
 ## Alarm Sounds
 
 There are already two alarm sounds:
@@ -57,4 +68,4 @@ There are already two alarm sounds:
 
 ### Documentation
 
-The documentation can be found [here](https://doclets.io/fewieden/MMM-AlarmClock/master)
+The documentation can be found [here](https://doclets.io/fewieden/MMM-AlarmClock)
