@@ -5,6 +5,7 @@
 ### Added
 
 * Add a new alarm option : timer
+* Add a .gitignore in sounds folder.
 
 ## [1.1.0]
 
