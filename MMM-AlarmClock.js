@@ -142,12 +142,12 @@ Module.register('MMM-AlarmClock', {
                 message: this.next.message
             };
             let timer = this.config.timer;
+            // If the alarm has specific timer and if MM is not touch, we use the alarm timer.
+            if (typeof this.next.timer !== 'undefined' && !this.config.touch) {
+                timer = this.next.timer;
+            }
             if (!this.config.touch) {
                 alert.timer = timer;
-            }
-            // If the alarm has specific timer and if MM is not touch, we use the alarm timer.
-            if (typeof this.next.timer !== "undefined" && !this.config.touch) {
-                alert.timer = timer = this.next.timer;
             }
             this.sendNotification('SHOW_ALERT', alert);
             this.alarmFired = true;
