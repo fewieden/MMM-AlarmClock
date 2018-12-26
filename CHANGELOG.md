@@ -1,5 +1,18 @@
 # MMM-AlarmClock Changelog
 
+## [2.0.0]
+
+### Added
+
+* Config option `popup` to avoid alert popup.
+* Nunjuck templates
+
+### Changed
+
+* Config files
+* Documentation is now hosted on github pages instead of doclets.io (unmaintained).
+* eslint recommended instead of airbnb ruleset.
+
 ## [1.1.1]
 
 ### Added

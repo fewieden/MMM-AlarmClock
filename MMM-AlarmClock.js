@@ -66,16 +66,18 @@ Module.register('MMM-AlarmClock', {
      * @property {boolean} fade - Flag to fade in alarm sound volume.
      * @property {int} fadeTimer - Fade in duration.
      * @property {number} fadeStep - Fade in volume steps.
+     * @property {boolean} popup - Flag to show alert popup or not.
      */
     defaults: {
         sound: 'alarm.mp3',
         touch: false,
         volume: 1.0,
         format: 'ddd, h:mmA',
-        timer: 60 * 1000, // one minute
+        timer: 60 * 1000,
         fade: false,
-        fadeTimer: 60 * 1000, // 60 seconds
-        fadeStep: 0.005 // 0.5%
+        fadeTimer: 60 * 1000,
+        fadeStep: 0.005,
+        popup: true
     },
 
     /**
@@ -117,6 +119,42 @@ Module.register('MMM-AlarmClock', {
     },
 
     /**
+     * @function getTemplate
+     * @description Nunjuck template.
+     * @override
+     *
+     * @returns {string} Path to nunjuck template.
+     */
+    getTemplate() {
+        return 'templates/MMM-Fuel.njk';
+    },
+
+    /**
+     * @function getTemplateData
+     * @description Data that gets rendered in the nunjuck template.
+     * @override
+     *
+     * @returns {string} Data for the nunjuck template.
+     */
+    getTemplateData() {
+        let src = this.config.sound;
+
+        if (this.alarmFired && this.next.sound) {
+            src = this.next.sound;
+        }
+
+        if (!src.match(/^https?:\/\//)) {
+            src = this.file(`sounds/${src}`);
+        }
+
+        return {
+            config: this.config,
+            next: this.next,
+            src
+        };
+    },
+
+    /**
      * @function start
      * @description Sets first alarm and creates interval to check the alarm event.
      * @override
@@ -133,6 +171,8 @@ Module.register('MMM-AlarmClock', {
     /**
      * @function checkAlarm
      * @description Checks the alarm event and triggers the alert.
+     *
+     * @returns {void}
      */
     checkAlarm() {
         if (!this.alarmFired && this.next && moment().diff(this.next.moment) >= 0) {
@@ -149,14 +189,16 @@ Module.register('MMM-AlarmClock', {
             if (!this.config.touch) {
                 alert.timer = timer;
             }
-            this.sendNotification('SHOW_ALERT', alert);
+            if (this.config.popup) {
+                this.sendNotification('SHOW_ALERT', alert);
+            }
             this.alarmFired = true;
             this.updateDom(300);
             this.timer = setTimeout(() => {
                 this.resetAlarmClock();
             }, timer);
-            if (this.config.touch) {
-                MM.getModules().enumerate((module) => {
+            if (this.config.touch && this.config.popup) {
+                MM.getModules().enumerate(module => {
                     if (module.name === 'alert') {
                         module.alerts['MMM-AlarmClock'].ntf.addEventListener('click', () => {
                             clearTimeout(this.timer);
@@ -172,6 +214,8 @@ Module.register('MMM-AlarmClock', {
     /**
      * @function fadeAlarm
      * @description Fades in the alarm sound step by step.
+     *
+     * @returns {void}
      */
     fadeAlarm() {
         let volume = 0;
@@ -191,6 +235,8 @@ Module.register('MMM-AlarmClock', {
     /**
      * @function setNextAlarm
      * @description Sets the next occurring alarm event.
+     *
+     * @returns {void}
      */
     setNextAlarm() {
         this.next = null;
@@ -206,10 +252,12 @@ Module.register('MMM-AlarmClock', {
     /**
      * @function resetAlarmClock
      * @description Resets the alarm clock.
+     *
+     * @returns {void}
      */
     resetAlarmClock() {
         this.alarmFired = false;
-        if (this.config.touch) {
+        if (this.config.touch && this.config.popup) {
             this.sendNotification('HIDE_ALERT');
         }
         this.setNextAlarm();
@@ -243,76 +291,22 @@ Module.register('MMM-AlarmClock', {
         for (let i = 0; i < alarm.days.length; i += 1) {
             if (now.day() < alarm.days[i]) {
                 difference = Math.min(alarm.days[i] - now.day(), difference);
-            } else if (now.day() === alarm.days[i] && (parseInt(now.hour()) < hour ||
-                (parseInt(now.hour()) === hour && parseInt(now.minute()) < minute))) {
+            } else if (now.day() === alarm.days[i] && (parseInt(now.hour()) < hour
+                || parseInt(now.hour()) === hour && parseInt(now.minute()) < minute)) {
                 difference = Math.min(0, difference);
             } else if (now.day() === alarm.days[i]) {
                 difference = Math.min(7, difference);
             } else {
-                difference = Math.min((7 - now.day()) + alarm.days[i], difference);
+                difference = Math.min(7 - now.day() + alarm.days[i], difference);
             }
         }
 
-        return moment().add(difference, 'days').set({
-            hour,
-            minute,
-            second: 0,
-            millisecond: 0
-        });
-    },
-
-    /**
-     * @function getDom
-     * @description Creates the UI as DOM for displaying in MagicMirror application.
-     * @override
-     *
-     * @returns {Element}
-     */
-    getDom() {
-        const wrapper = document.createElement('div');
-        const header = document.createElement('header');
-        header.classList.add('align-left');
-
-        const logo = document.createElement('i');
-        logo.classList.add('fa', 'fa-bell-o', 'logo');
-        header.appendChild(logo);
-
-        const name = document.createElement('span');
-        name.innerHTML = this.translate('ALARM_CLOCK');
-        header.appendChild(name);
-        wrapper.appendChild(header);
-
-        if (!this.next) {
-            const text = document.createElement('div');
-            text.innerHTML = this.translate('LOADING');
-            text.classList.add('dimmed', 'light');
-            wrapper.appendChild(text);
-        } else if (this.alarmFired) {
-            const sound = document.createElement('audio');
-            let srcSound = this.config.sound;
-            if (this.next.sound) {
-                srcSound = this.next.sound;
-            }
-            if (!srcSound.match(/^https?:\/\//)) {
-                srcSound = this.file(`sounds/${srcSound}`);
-            }
-            sound.src = srcSound;
-            sound.volume = this.config.volume;
-            sound.setAttribute('id', 'MMM-AlarmClock-Player');
-            sound.volume = this.config.fade ? 0 : this.config.volume;
-            sound.setAttribute('autoplay', true);
-            sound.setAttribute('loop', true);
-            if (this.config.fade === true) {
-                this.fadeAlarm();
-            }
-            wrapper.appendChild(sound);
-        } else {
-            const alarm = document.createElement('div');
-            alarm.classList.add('small');
-            alarm.innerHTML = `${this.next.title}: ${this.next.moment.format(this.config.format)}`;
-            wrapper.appendChild(alarm);
-        }
-
-        return wrapper;
+        return moment().add(difference, 'days')
+            .set({
+                hour,
+                minute,
+                second: 0,
+                millisecond: 0
+            });
     }
 });

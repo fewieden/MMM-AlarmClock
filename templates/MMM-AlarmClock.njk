@@ -1,0 +1,17 @@
+<header class="align-left">
+    <i class="fa fa-bell-o logo"></i>
+    <span>{{ 'ALARM_CLOCK' | translate }}</span>
+</header>
+{% if not next %}
+    <div class="dimmed light">{{ 'LOADING' | translate }}</div>
+{% elif alarmFired %}
+    <audio
+        id="MMM-AlarmClock-Player"
+        src="{{ next }}"
+        volume="{{ 0 if config.fade else config.volume }}"
+        autoplay
+        loop
+    />
+{% else %}
+    <div class="small">{{ next.title }}: {{ next.moment.format(config.format) }}</div>
+{% endif %}
