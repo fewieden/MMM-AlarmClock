@@ -194,7 +194,7 @@ Module.register('MMM-AlarmClock', {
                 this.sendNotification('SHOW_ALERT', alert);
             }
             this.alarmFired = true;
-            this.updateDom(300);
+            this.updateDom();
             this.timer = setTimeout(() => {
                 this.resetAlarmClock();
             }, timer);
@@ -208,7 +208,12 @@ Module.register('MMM-AlarmClock', {
                         });
                     }
                 });
-            }
+            },
+            setTimeout(() => {
+                const player = document.getElementById('MMM-AlarmClock-Player');
+                player.volume = this.config.fade ? 0 : this.config.volume;
+                this.fadeAlarm();
+            }, 100);
         }
     },
 
