@@ -150,6 +150,7 @@ Module.register('MMM-AlarmClock', {
         return {
             config: this.config,
             next: this.next,
+            alarmFired: this.alarmFired,
             src
         };
     },
