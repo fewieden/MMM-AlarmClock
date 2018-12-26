@@ -5,8 +5,6 @@ node_modules/
 
 .idea/
 
-docs/
-
 sounds/*
 !sounds/blackforest.mp3
 !sounds/alarm.mp3
