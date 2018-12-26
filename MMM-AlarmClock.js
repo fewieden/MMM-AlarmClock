@@ -126,7 +126,7 @@ Module.register('MMM-AlarmClock', {
      * @returns {string} Path to nunjuck template.
      */
     getTemplate() {
-        return 'templates/MMM-Fuel.njk';
+        return 'templates/MMM-AlarmClock.njk';
     },
 
     /**
