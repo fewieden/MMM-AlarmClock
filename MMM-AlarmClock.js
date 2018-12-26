@@ -208,7 +208,7 @@ Module.register('MMM-AlarmClock', {
                         });
                     }
                 });
-            },
+            }
             setTimeout(() => {
                 const player = document.getElementById('MMM-AlarmClock-Player');
                 player.volume = this.config.fade ? 0 : this.config.volume;
