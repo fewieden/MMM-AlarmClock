@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: MMM-AlarmClock.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: MMM-AlarmClock.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * @file MMM-AlarmClock.js
  *
  * @author fewieden
@@ -107,7 +135,7 @@ Module.register('MMM-AlarmClock', {
      * @description Translations for this module.
      * @override
      *
-     * @returns {Object.<string, string>} Available translations for this module (key: language code, value: filepath).
+     * @returns {Object.&lt;string, string>} Available translations for this module (key: language code, value: filepath).
      */
     getTranslations() {
         return {
@@ -139,7 +167,7 @@ Module.register('MMM-AlarmClock', {
     getTemplateData() {
         let src = this.config.sound;
 
-        if (this.alarmFired && this.next.sound) {
+        if (this.alarmFired &amp;&amp; this.next.sound) {
             src = this.next.sound;
         }
 
@@ -193,7 +221,7 @@ Module.register('MMM-AlarmClock', {
      * @returns {void}
      */
     checkAlarm() {
-        if (!this.alarmFired && this.next && moment().diff(this.next.moment) >= 0) {
+        if (!this.alarmFired &amp;&amp; this.next &amp;&amp; moment().diff(this.next.moment) >= 0) {
             const alert = {
                 imageFA: 'bell-o',
                 title: this.next.sender || this.next.title,
@@ -201,7 +229,7 @@ Module.register('MMM-AlarmClock', {
             };
             let timer = this.config.timer;
             // If the alarm has specific timer and if MM is not touch, we use the alarm timer.
-            if (typeof this.next.timer !== 'undefined' && !this.config.touch) {
+            if (typeof this.next.timer !== 'undefined' &amp;&amp; !this.config.touch) {
                 timer = this.next.timer;
             }
             if (!this.config.touch) {
@@ -215,7 +243,7 @@ Module.register('MMM-AlarmClock', {
             this.timer = setTimeout(() => {
                 this.resetAlarmClock();
             }, timer);
-            if (this.config.touch && this.config.popup) {
+            if (this.config.touch &amp;&amp; this.config.popup) {
                 MM.getModules().enumerate(module => {
                     if (module.name === 'alert') {
                         module.alerts['MMM-AlarmClock'].ntf.addEventListener('click', () => {
@@ -261,9 +289,9 @@ Module.register('MMM-AlarmClock', {
      */
     setNextAlarm() {
         this.next = null;
-        for (let i = 0; i < this.config.alarms.length; i += 1) {
+        for (let i = 0; i &lt; this.config.alarms.length; i += 1) {
             const temp = this.getMoment(this.config.alarms[i]);
-            if (!this.next || temp.diff(this.next.moment) < 0) {
+            if (!this.next || temp.diff(this.next.moment) &lt; 0) {
                 this.next = this.config.alarms[i];
                 this.next.moment = temp;
             }
@@ -280,7 +308,7 @@ Module.register('MMM-AlarmClock', {
         clearTimeout(this.timer);
         clearTimeout(this.fadeInterval);
         this.alarmFired = false;
-        if (this.config.touch && this.config.popup) {
+        if (this.config.touch &amp;&amp; this.config.popup) {
             this.sendNotification('HIDE_ALERT');
         }
         this.setNextAlarm();
@@ -297,7 +325,7 @@ Module.register('MMM-AlarmClock', {
      *
      * @returns {Object} Moment object for the next occurrence of this alarm event.
      *
-     * @example <caption>alarm object</caption>
+     * @example &lt;caption>alarm object&lt;/caption>
      * {
      *      time: "18:30",
      *      days: [2,4],
@@ -311,11 +339,11 @@ Module.register('MMM-AlarmClock', {
         const hour = parseInt(alarm.time.split(':')[0]);
         const minute = parseInt(alarm.time.split(':')[1]);
 
-        for (let i = 0; i < alarm.days.length; i += 1) {
-            if (now.day() < alarm.days[i]) {
+        for (let i = 0; i &lt; alarm.days.length; i += 1) {
+            if (now.day() &lt; alarm.days[i]) {
                 difference = Math.min(alarm.days[i] - now.day(), difference);
-            } else if (now.day() === alarm.days[i] && (parseInt(now.hour()) < hour
-                || parseInt(now.hour()) === hour && parseInt(now.minute()) < minute)) {
+            } else if (now.day() === alarm.days[i] &amp;&amp; (parseInt(now.hour()) &lt; hour
+                || parseInt(now.hour()) === hour &amp;&amp; parseInt(now.minute()) &lt; minute)) {
                 difference = Math.min(0, difference);
             } else if (now.day() === alarm.days[i]) {
                 difference = Math.min(7, difference);
@@ -333,3 +361,26 @@ Module.register('MMM-AlarmClock', {
             });
     }
 });
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-MMM-AlarmClock.html">MMM-AlarmClock</a></li></ul><h3>Externals</h3><ul><li><a href="external-config.html">config</a></li><li><a href="external-Log.html">Log</a></li><li><a href="external-MM.html">MM</a></li><li><a href="external-Module.html">Module</a></li><li><a href="external-moment.html">moment</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 27 2018 20:52:39 GMT+0100 (W. Europe Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

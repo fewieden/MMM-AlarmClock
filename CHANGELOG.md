@@ -6,6 +6,7 @@
 
 * Config option `popup` to avoid alert popup.
 * Nunjuck templates
+* Notification handler `STOP_ALARM` to stop an alarm from another module.
 
 ### Changed
 

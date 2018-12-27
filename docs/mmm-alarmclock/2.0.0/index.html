@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Home</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Home</h1>
+
+    
+
+
+
+    
+
+
+    <h3>mmm-alarmclock 2.0.0</h3>
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
+    <section>
+        <article><h1>MMM-AlarmClock <a href="https://raw.githubusercontent.com/fewieden/MMM-AlarmClock/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg?style=flat" alt="GitHub license"></a> <a href="https://travis-ci.org/fewieden/MMM-AlarmClock"><img src="https://travis-ci.org/fewieden/MMM-AlarmClock.svg?branch=master" alt="Build Status"></a> <a href="https://codeclimate.com/github/fewieden/MMM-AlarmClock"><img src="https://codeclimate.com/github/fewieden/MMM-AlarmClock/badges/gpa.svg?style=flat" alt="Code Climate"></a> <a href="https://snyk.io/test/github/fewieden/mmm-alarmclock"><img src="https://snyk.io/test/github/fewieden/mmm-alarmclock/badge.svg" alt="Known Vulnerabilities"></a> <a href="https://fewieden.github.io/MMM-AlarmClock/"><img src="https://img.shields.io/badge/Documentation-master-brightgreen.svg" alt="Documentation"></a></h1><p>Alarm Clock Module for MagicMirror<sup>2</sup></p>
+<h2>Example</h2><p><img src=".github/example.jpg" alt="">   <img src=".github/example2.jpg" alt=""></p>
+<h2>Dependencies</h2><ul>
+<li>An installation of <a href="https://github.com/MichMich/MagicMirror">MagicMirror<sup>2</sup></a></li>
+</ul>
+<h2>Installation</h2><ol>
+<li>Clone this repo into <code>~/MagicMirror/modules</code> directory.</li>
+<li><p>Configure your <code>~/MagicMirror/config/config.js</code>:</p>
+<pre class="prettyprint source"><code> {
+     module: 'MMM-AlarmClock',
+     position: 'top_right',
+     config: {
+         alarms: [
+             {time: &quot;18:30&quot;, days: [2,4], title: &quot;Soccer&quot;, message: &quot;Get ready for soccer training!&quot;, sound: &quot;alarm.mp3&quot;},
+             ...
+         ],
+         ...
+     }
+ }</code></pre></li>
+</ol>
+<h2>Config Options</h2><table>
+<thead>
+<tr>
+<th><strong>Option</strong></th>
+<th><strong>Default</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>alarms</code></td>
+<td><code>REQUIRED</code></td>
+<td>An Array with all your alarms as objects. Those objects need to have the properties -&gt; time: 24h format, days: Array of all days the alarm should be fired (0 = Sunday, 6 = Saturday), title, message, and sound. If sound is not defined, alarm will be fired with module defined/default alarm sound.</td>
+</tr>
+<tr>
+<td><code>sound</code></td>
+<td><code>'alarm.mp3'</code></td>
+<td>Name and extension of your alarm sound. File needs to be placed in <code>~/MagicMirror/modules/MMM-AlarmClock/sounds</code>. Standard files are <code>alarm.mp3</code> and <code>blackforest.mp3</code>.  Alternatively specify a web stream <code>http</code> or <code>https</code>.</td>
+</tr>
+<tr>
+<td><code>volume</code></td>
+<td><code>1.0</code></td>
+<td>The volume of the alarm sound in a range from <code>0.0</code> to <code>1.0</code></td>
+</tr>
+<tr>
+<td><code>touch</code></td>
+<td><code>false</code></td>
+<td>If you are using a touch screen device you need to press a button to disable an alarm..</td>
+</tr>
+<tr>
+<td><code>format</code></td>
+<td><code>'ddd, h:mmA'</code></td>
+<td>In which format the alarm in the header should be displayed. <a href="http://momentjs.com/docs/#/displaying/format/">All Options</a></td>
+</tr>
+<tr>
+<td><code>timer</code></td>
+<td><code>60000</code> (1 min)</td>
+<td>How long the alarm should ring for non touch screen or without interaction on touch screen devices.</td>
+</tr>
+<tr>
+<td><code>fade</code></td>
+<td><code>false</code></td>
+<td>Set to enable a gradual fade-in of the alarm sound.</td>
+</tr>
+<tr>
+<td><code>fadeTimer</code></td>
+<td><code>60 * 1000</code> (1 min)</td>
+<td>How long to fade into the alarm before <code>volume</code> is set.</td>
+</tr>
+<tr>
+<td><code>fadeStep</code></td>
+<td><code>.005</code> (.5%)</td>
+<td>Increase the volume this percent amount each second until <code>fadeTimer</code> is reached.</td>
+</tr>
+<tr>
+<td><code>popup</code></td>
+<td><code>true</code></td>
+<td>Flag to show alert popup or not.</td>
+</tr>
+</tbody>
+</table>
+<h2>Alarm Options</h2><table>
+<thead>
+<tr>
+<th><strong>Option</strong></th>
+<th><strong>Description</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>time</code></td>
+<td>Time at which the alarm should sound.</td>
+</tr>
+<tr>
+<td><code>days</code></td>
+<td>Days of the week. <br/><code>0 =&gt; Sunday, 1 =&gt; Monday, 2 =&gt; Tuesday, 3 =&gt; Wednesday, 4 =&gt; Thursday, 5 =&gt; Friday, 6 =&gt; Saturday</code><br/><br/><strong>Example :</strong> <code>[1, 2, 3, 4, 5], // From Monday to Friday.</code></td>
+</tr>
+<tr>
+<td><code>title</code></td>
+<td>Title that will be displayed in the alert.</td>
+</tr>
+<tr>
+<td><code>message</code></td>
+<td>Message of the alarm</td>
+</tr>
+<tr>
+<td><code>sound</code></td>
+<td>Name or the url of the mp3 file. By default, the sound of the config will be use if this option is empty.</td>
+</tr>
+<tr>
+<td><code>timer</code></td>
+<td>Timer when the alarm will end. By default, the timer of the configuration will be used.</td>
+</tr>
+</tbody>
+</table>
+<h2>Alarm Sounds</h2><p>There are already two alarm sounds:</p>
+<ul>
+<li><a href="http://www.orangefreesounds.com/mp3-alarm-clock/">alarm.mp3</a> | From Alexander licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></li>
+<li><a href="http://www.orangefreesounds.com/coo-coo-clock-sound/">blackforest.mp3</a> | From Alexander licensed under <a href="https://creativecommons.org/licenses/by-nc/4.0/">CC BY-NC 4.0</a></li>
+</ul>
+<h2>Developer</h2><ul>
+<li><code>npm run lint</code> - Lints JS and CSS files.</li>
+<li><code>npm run docs</code> - Generates documentation.</li>
+</ul>
+<h3>Documentation</h3><p>The documentation can be found <a href="https://fewieden.github.io/MMM-AlarmClock/">here</a></p></article>
+    </section>
+
+
+
+
+
+
+
+
+
+<section>
+
+<header>
+    
+        <h2>MMM-AlarmClock.js</h2>
+        
+    
+</header>
+
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description">MMM-AlarmClock.js</div>
+        
+
+        
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li>fewieden</li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+    <dt class="tag-license">License:</dt>
+    <dd class="tag-license"><ul class="dummy"><li>MIT</li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="MMM-AlarmClock.js.html">MMM-AlarmClock.js</a>, <a href="MMM-AlarmClock.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+    <dt class="tag-see">See:</dt>
+    <dd class="tag-see">
+        <ul>
+            <li><a href="https://github.com/fewieden/MMM-AlarmClock">https://github.com/fewieden/MMM-AlarmClock</a></li>
+        </ul>
+    </dd>
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-MMM-AlarmClock.html">MMM-AlarmClock</a></li></ul><h3>Externals</h3><ul><li><a href="external-config.html">config</a></li><li><a href="external-Log.html">Log</a></li><li><a href="external-MM.html">MM</a></li><li><a href="external-Module.html">Module</a></li><li><a href="external-moment.html">moment</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Thu Dec 27 2018 20:52:39 GMT+0100 (W. Europe Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
