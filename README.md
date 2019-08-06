@@ -1,4 +1,4 @@
-# MMM-AlarmClock [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/fewieden/MMM-AlarmClock/master/LICENSE) [![Build Status](https://travis-ci.org/fewieden/MMM-AlarmClock.svg?branch=master)](https://travis-ci.org/fewieden/MMM-AlarmClock) [![Code Climate](https://codeclimate.com/github/fewieden/MMM-AlarmClock/badges/gpa.svg?style=flat)](https://codeclimate.com/github/fewieden/MMM-AlarmClock) [![Known Vulnerabilities](https://snyk.io/test/github/fewieden/mmm-alarmclock/badge.svg)](https://snyk.io/test/github/fewieden/mmm-alarmclock) [![API Doc](https://doclets.io/fewieden/MMM-AlarmClock/master.svg)](https://doclets.io/fewieden/MMM-AlarmClock/master)
+# MMM-AlarmClock [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg?style=flat)](https://raw.githubusercontent.com/fewieden/MMM-AlarmClock/master/LICENSE) [![Build Status](https://travis-ci.org/fewieden/MMM-AlarmClock.svg?branch=master)](https://travis-ci.org/fewieden/MMM-AlarmClock) [![Code Climate](https://codeclimate.com/github/fewieden/MMM-AlarmClock/badges/gpa.svg?style=flat)](https://codeclimate.com/github/fewieden/MMM-AlarmClock) [![Known Vulnerabilities](https://snyk.io/test/github/fewieden/mmm-alarmclock/badge.svg)](https://snyk.io/test/github/fewieden/mmm-alarmclock)
 
 Alarm Clock Module for MagicMirror<sup>2</sup>
 
@@ -39,9 +39,21 @@ Alarm Clock Module for MagicMirror<sup>2</sup>
 | `touch` | `false` | If you are using a touch screen device you need to press a button to disable an alarm.. |
 | `format` | `'ddd, h:mmA'` | In which format the alarm in the header should be displayed. [All Options](http://momentjs.com/docs/#/displaying/format/) |
 | `timer` | `60000` (1 min) | How long the alarm should ring for non touch screen or without interaction on touch screen devices. |
-| `fade` | `false` | Set to enable a gradual fade-in of the alarm sound.
-| `fadeTimer` | `60 * 1000` (1 min) | How long to fade into the alarm before `volume` is set.
-| `fadeStep` | `.005` (.5%) | Increase the volume this percent amount each second until `fadeTimer` is reached.
+| `fade` | `false` | Set to enable a gradual fade-in of the alarm sound. |
+| `fadeTimer` | `60 * 1000` (1 min) | How long to fade into the alarm before `volume` is set. |
+| `fadeStep` | `.005` (.5%) | Increase the volume this percent amount each second until `fadeTimer` is reached. |
+| `popup` | `true` | Flag to show alert popup or not. |
+
+## Alarm Options
+
+| **Option**| **Description** |
+| --- | --- |
+| `time` | Time at which the alarm should sound. |
+| `days` | Days of the week. <br/>``0 => Sunday, 1 => Monday, 2 => Tuesday, 3 => Wednesday, 4 => Thursday, 5 => Friday, 6 => Saturday``<br/><br/>**Example :** ``[1, 2, 3, 4, 5], // From Monday to Friday.`` |
+| `title` |  Title that will be displayed in the alert. |
+| `message` | Message of the alarm |
+| `sound` | Name or the url of the mp3 file. By default, the sound of the config will be use if this option is empty. |
+| `timer` | Timer when the alarm will end. By default, the timer of the configuration will be used. |
 
 ## Alarm Sounds
 
@@ -54,7 +66,3 @@ There are already two alarm sounds:
 
 * `npm run lint` - Lints JS and CSS files.
 * `npm run docs` - Generates documentation.
-
-### Documentation
-
-The documentation can be found [here](https://doclets.io/fewieden/MMM-AlarmClock/master)
