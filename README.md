@@ -66,7 +66,3 @@ There are already two alarm sounds:
 
 * `npm run lint` - Lints JS and CSS files.
 * `npm run docs` - Generates documentation.
-
-### Documentation
-
-The documentation can be found [here](https://fewieden.github.io/MMM-AlarmClock/)
