@@ -5,7 +5,7 @@
 {% if not next %}
     <div class="dimmed light">{{ 'LOADING' | translate }}</div>
 {% elif alarmFired %}
-    <audio id="MMM-AlarmClock-Player" src="{{ src }}" autoplay loop />
+    <audio id="MMM-AlarmClock-Player" src="{{ src }}" autoplay loop volume="0" />
 {% else %}
     <div class="small">{{ next.title }}: {{ next.moment.format(config.format) }}</div>
 {% endif %}

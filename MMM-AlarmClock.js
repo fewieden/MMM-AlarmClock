@@ -239,10 +239,10 @@ Module.register('MMM-AlarmClock', {
      * @returns {void}
      */
     fadeAlarm() {
-        let volume = 0;
+        let volume = this.config.fade ? 0 : this.config.volume;
         let counter = 0;
+        const player = document.getElementById('MMM-AlarmClock-Player');
         this.fadeInterval = setInterval(() => {
-            const player = document.getElementById('MMM-AlarmClock-Player');
             player.volume = volume;
             volume += this.config.fadeStep;
             counter += 1000;
