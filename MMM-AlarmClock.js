@@ -114,7 +114,8 @@ Module.register('MMM-AlarmClock', {
             en: 'translations/en.json',
             de: 'translations/de.json',
             fr: 'translations/fr.json',
-            id: 'translations/id.json'
+            id: 'translations/id.json',
+            ko: 'translations/ko.json'
         };
     },
 
