@@ -1,6 +1,6 @@
 {
   "name": "mmm-alarmclock",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "description": "Alarm Clock Module for MagicMirror2",
   "scripts": {
     "lint": "./node_modules/.bin/eslint . && ./node_modules/.bin/stylelint .",

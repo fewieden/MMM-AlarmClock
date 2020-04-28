@@ -1,5 +1,15 @@
 # MMM-AlarmClock Changelog
 
+## [2.0.1]
+
+### Fixed
+
+* Fading of alert sound.
+
+### Added
+
+* Korean translations
+
 ## [2.0.0]
 
 ### Added

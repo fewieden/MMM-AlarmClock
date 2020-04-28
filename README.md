@@ -4,7 +4,7 @@ Alarm Clock Module for MagicMirror<sup>2</sup>
 
 ## Example
 
-![](.github/example.jpg)   ![](.github/example2.jpg)
+![Active alarm](.github/example.jpg)   ![Scheduled alarm](.github/example2.jpg)
 
 ## Dependencies
 
@@ -12,22 +12,22 @@ Alarm Clock Module for MagicMirror<sup>2</sup>
 
 ## Installation
 
-1. Clone this repo into `~/MagicMirror/modules` directory.
-1. Configure your `~/MagicMirror/config/config.js`:
+* Clone this repo into `~/MagicMirror/modules` directory.
+* Configure your `~/MagicMirror/config/config.js`:
 
-    ```
-    {
-        module: 'MMM-AlarmClock',
-        position: 'top_right',
-        config: {
-            alarms: [
-                {time: "18:30", days: [2,4], title: "Soccer", message: "Get ready for soccer training!", sound: "alarm.mp3"},
-                ...
-            ],
+```js
+{
+    module: 'MMM-AlarmClock',
+    position: 'top_right',
+    config: {
+        alarms: [
+            {time: "18:30", days: [2,4], title: "Soccer", message: "Get ready for soccer training!", sound: "alarm.mp3"},
             ...
-        }
+        ],
+        ...
     }
-    ```
+}
+```
 
 ## Config Options
 
