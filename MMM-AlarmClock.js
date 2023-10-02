@@ -183,7 +183,7 @@ Module.register('MMM-AlarmClock', {
      */
     notificationReceived(notification) {
         if (notification === 'STOP_ALARM') {
-            this.resetAlarmClock()
+            this.resetAlarmClock();
         }
     },
 
@@ -216,16 +216,17 @@ Module.register('MMM-AlarmClock', {
             this.timer = setTimeout(() => {
                 this.resetAlarmClock();
             }, timer);
-            if (this.config.touch && this.config.popup) {
-                MM.getModules().enumerate(module => {
-                    if (module.name === 'alert') {
-                        module.alerts['MMM-AlarmClock'].ntf.addEventListener('click', () => {
-                            this.resetAlarmClock();
-                        });
-                    }
-                });
-            }
             setTimeout(() => {
+                if (this.config.touch && this.config.popup) {
+                    MM.getModules().enumerate(module => {
+                        if (module.name === 'alert') {
+                            module.alerts['MMM-AlarmClock'].ntf.addEventListener('click', () => {
+                                this.resetAlarmClock();
+                            });
+                        }
+                    });
+                }
+
                 const player = document.getElementById('MMM-AlarmClock-Player');
                 player.volume = this.config.fade ? 0 : this.config.volume;
                 this.fadeAlarm();

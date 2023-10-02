@@ -1,5 +1,11 @@
 # MMM-AlarmClock Changelog
 
+## [2.0.2]
+
+### Fixed
+
+* Timing of alert click handler registration
+
 ## [2.0.1]
 
 ### Fixed
