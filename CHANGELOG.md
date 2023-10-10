@@ -1,5 +1,15 @@
 # MMM-AlarmClock Changelog
 
+## [Unreleased]
+
+### Fixed
+
+### Added
+
+### Changed
+
+### Removed
+
 ## [2.0.2]
 
 ### Fixed
